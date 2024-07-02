@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 우선순위</title>
+    <link rel="stylesheet" href="../css/my.css">
+    <style>
+        /** 내부 스타일시트 */
+        div {
+            background-color: coral;
+            color: white;
+        }
+        *{
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h3>CSS 우선순위</h3>
+    <hr>
+
+    <!-- 인라인 스타일시트 -->
+    <div
+        style="background-color: khaki; color: black;"
+    >비가 많이 와용</div>
+    
+</body>
+</html>

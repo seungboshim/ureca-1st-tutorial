@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Selector(타입선택자)</title>
+    <style type="text/css">
+      /* div, p {
+        padding: 10px;
+        margin: 10px;
+        font-weight: bold;
+      }
+      div p {
+        background: skyblue;
+        color: magenta;
+      } */
+      /* div {
+        background: skyblue;
+        color: magenta;
+      }
+      p {
+        background: lightgray;
+        color: orange;
+      } */
+      div div {
+        background-color: aqua;
+      }
+      div > p {
+        background-color: yellow;
+      }
+      div p {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h2>h2 Type Selector h2</h2>
+    <div>div Type Selector div
+        <p>dd</p>
+    </div>
+    <p>p Type Selector p</p> -->
+    
+    <div> div
+        <p>div > p</p>
+        <div>div div
+            <p>div p</p>
+        </div>
+    </div>
+  </body>
+</html>

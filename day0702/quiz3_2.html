@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    tr :first-child {
+      text-align: center;
+    }
+    tr :nth-child(2) {
+      text-align: start;
+    }
+  </style>
 </head>
 <body>
   <h3>세번째 퀴즈</h3>
@@ -11,35 +19,35 @@
   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <h3>form control test - 회원가입</h3>
     <form>
-      <table border=1 style="text-align: center;">
+      <table border=1>
         <tr>
           <td>이름</td>
-          <td style="text-align: start; width: 400px;">
+          <td style="width: 400px;">
             <input type="text" id="name" name="name" style="width: 160px;"/>
           </td>
         </tr>
         <tr>
           <td>아이디</td>
-          <td style="text-align: start;">
+          <td>
             <input type="text" id="userId" name="userId" style="width: 160px;" >
             <button>중복확인</button>
           </td>
         </tr>
         <tr>
           <td>비밀번호</td>
-          <td style="text-align: start;">
+          <td>
             <input type="password" style="width: 160px;">
           </td>
         </tr>
         <tr>
           <td>비밀번호확인</td>
-          <td style="text-align: start;">
+          <td>
             <input type="password" style="width: 160px;">
           </td>
         </tr>
         <tr>
           <td>성별</td>
-          <td style="text-align: start;">
+          <td>
             <input type="radio" name="gender" id="male">남
             <input type="radio" name="gender" id="female" checked="checked">여
           </td>
@@ -57,7 +65,7 @@
         </tr>
         <tr>
           <td>이메일</td>
-          <td style="text-align: start;">
+          <td>
             <input type="text" id="emailId" name="emailId" style="width: 100px;"> @
             <select name="email" id="email">
               <option value="type">직접입력</option>
@@ -70,7 +78,7 @@
         </tr>
         <tr>
           <td>연락처</td>
-          <td style="text-align: start;">
+          <td>
             <select>
               <option value="010">010</option>
               <option value="02">02</option>

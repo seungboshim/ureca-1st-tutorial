@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div:nth-child(3) {
+            background-color: aquamarine;
+        }
+        div:nth-child(4) {
+            background-color: pink;
+        }
+        div {
+            display: inline; /* block 속성이던 div 태그에 inline 속성 부여 */
+        }
+        span {
+            display: block; /* inline 이던 span에 block 속성 부여*/
+            width: 50%; /* inline일 때는 width가 컨텐츠 크기에 자동 조절 */
+            background-color: plum;
+        }
+        p {
+            background-color: lightcoral;
+            /* display: inline; /* inline 부여 시 아래의 속성 안먹힘 */ 
+            width: 50%;
+            height: 10vh;
+        }
+        div div {
+            background-color: lightgreen;
+            display: inline-block; /* inline-block 속성 부여 시 둘다의 특징을 가짐 */
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h3>inline-block 테스트</h3>
+    <hr>
+    <div>여기는 선릉</div><div>유레카 캠퍼스</div>
+
+    <span>현재시간은 오후 4시입니다.</span>
+
+    <p>ㅇㅇ</p>
+
+    <div>
+        <div>ddd</div>
+    </div>
+</body>
+</html>
