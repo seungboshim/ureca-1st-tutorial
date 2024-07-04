@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="image" src="../image/won.jpg" width="500" onclick="handleChange()">
+
+    <script>
+        let flag = true;
+        const image = document.getElementById('image');
+        const handleChange = () => {
+            if (flag) {
+                image.src = '../image/wedding.jpg';
+                flag = false;
+            } else {
+                image.src = '../image/won.jpg';
+                flag = true;
+            }
+        };
+    </script>
+</body>
+</html>

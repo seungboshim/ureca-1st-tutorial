@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>심플계산기</title>
+  <style>
+	  *{text-align: center;}
+  </style>
+</head>
+<body>
+  <h3>심플계산기</h3>
+  <hr>
+  <form name="calcForm">
+     <input name="su1" id="su1" type="text" >
+     +
+     <input name="su2" id="su2" type="text" >
+     <input type="button" onclick="calculate()" value="계산"><br>
+         결과값:
+     <input name="result" id="result" type="text">
+  </form>
+  <script>
+    let calcForm = document.getElementsByName('calcForm');
+    let su1 = document.getElementById('su1');
+    let su2 = document.getElementById('su2');
+    let result = document.getElementById('result');
+
+    const calculate = () => {
+      let sum = plus(su1.value, su2.value);
+      if (!isNaN(sum)) {
+        result.value = sum;
+      } else {
+        su1.value = '';
+        su2.value = '';
+        result.value = sum;
+      }
+    }
+  </script>
+  <script src="../js/myfun.js"></script>
+</body>
+</html>

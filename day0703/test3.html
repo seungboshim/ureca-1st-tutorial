@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let strArr = [''];
+        const print9x9 = () => {
+            for (let i = 2; i <= 9; i++) {
+                for (let j = 1; j <= 9; j++) {
+                    document.write(`
+                        <div style="display: inline-block; width: 50px; padding: 10px;">
+                            ${i}*${j}=${i * j}
+                        </div>
+                    `);
+                }
+                document.write("<br>");
+            }
+        }
+        print9x9();
+
+        document.write("<pre>");
+        for (let i = 2; i <= 9; i++) {
+            for (let j = 1; j <= 9; j++) {
+                document.write(`${i}*${j}=${i * j}\t`);
+            }
+            document.write("<br>");
+        }
+        document.write("</pre>");
+    </script>
+</body>
+</html>

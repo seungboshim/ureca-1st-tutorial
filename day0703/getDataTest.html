@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>데이터값 얻어오기</title>
+    <script>   
+        let favFruits = "";
+
+        function getCheckboxValue(event) {
+            if (event.target.checked) {
+                favFruits += event.target.value + " ";
+            } else {
+                favFruits = favFruits.replace(event.target.value + " ", "");
+            }
+        }
+
+        function printData(){
+            let frm = document.getElementById('frm');
+            let id = frm.id.value;
+            let pwd = frm.pwd.value;
+            let room = frm.room.value;
+            let hide = frm.hide.value;
+            let file = frm.myfile.value;
+            let sports = frm.sports.value;
+            let note = frm.note.value;
+
+            alert(
+                "id: " + id +
+                "\npw: " + pwd + 
+                "\n좋아하는 과일: " + favFruits +
+                "\n강의실: " + room +
+                "\n보여요: " + hide +
+                "\n파일: " + file +
+                "\n운동: " + sports +
+                "\n비고: " + note
+            );
+        }//printData
+    </script>
+</head>
+<!-- getDataTest.html -->
+<body>
+    <h3>데이터값 얻어오기</h3>
+    <hr>
+    <form name="frm" id="frm">
+        아이디 : <input type="text" name="id" placeholder="아이디입력"><br>
+        비밀번호: <input type="password" name="pwd"><br>
+
+        좋아하는 과일: 
+        <input type="checkbox" name='apple' value="풋사과" onclick="getCheckboxValue(event)"/>사과
+        <input type="checkbox" name="straw" value="딸기" onclick="getCheckboxValue(event)">딸기
+        <input type="checkbox" name="banana" value="바나나" onclick="getCheckboxValue(event)">바나나          
+        <br>
+
+        당신의 강의실:
+        <input type="radio" name="room" value="1강의실"> 1강의실
+        <input type="radio" name="room" value="2강의실"> 2강의실
+        <input type="radio" name="room" value="3강의실"> 3강의실      
+        <input type="radio" name="room" value="4강의실"> 4강의실
+        <br>            
+
+        나보여? 
+        <input type="hidden" value="지킬박사와 하이드" name="hide">     
+        <br>      
+
+        파일업로드:
+        <input type="file" name="myfile">
+        <!-- 로컬PC(사용자PC)에 있는 파일을 서버(PC)에 올릴때(전송할때) 사용 -->
+        <br>
+
+        운동:
+        <select name="sports">
+            <option value="baseball">야구</option>  
+            <option>축구</option>  
+            <option>농구</option>  
+            <option>배구</option>  
+        </select>
+        <br> 
+
+        비고: 
+        <textarea rows="5" cols="10" name="note"></textarea>
+        <br>
+
+        <button onclick="printData()" type="submit">등록</button>
+    </form>
+</body>
+</html>
