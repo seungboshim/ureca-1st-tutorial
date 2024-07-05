@@ -11,27 +11,30 @@
   <h3>심플계산기</h3>
   <hr>
   <form name="calcForm">
-     <input name="su1" id="su1" type="text" >
-     +
-     <input name="su2" id="su2" type="text" >
-     <input type="submit" onclick="calculate()" value="계산"><br>
-         결과값:
-     <input name="result" id="result" type="text">
+    <input name="su1" id="su1" type="text" >
+    +
+    <input name="su2" id="su2" type="text" >
+    <input type="button" onclick="calculate()" value="계산"><br>
+    결과값: 
   </form>
+  <div id="result"></div>
   <script>
     let calcForm = document.calcForm;
     let su1 = document.calcForm.su1;
     let su2 = document.calcForm.su2;
-    let result = document.calcForm.result;
+    let result = document.getElementById('result');
+
+    let divNode = document.createElement('div');
+
 
     const calculate = () => {
       let sum = plus(su1.value, su2.value);
       if (!isNaN(sum)) {
-        result.value = sum;
+        divNode.innerHTML = sum;
       } else {
         su1.value = '';
         su2.value = '';
-        result.value = sum;
+        result.innerHTML = sum;
       }
     }
   </script>

@@ -7,10 +7,16 @@
         let favFruits = "";
 
         function getCheckboxValue(event) {
-            if (event.target.checked) {
-                favFruits += event.target.value + " ";
-            } else {
-                favFruits = favFruits.replace(event.target.value + " ", "");
+            // if (event.target.checked) {
+            //     favFruits += event.target.value + " ";
+            // } else {
+            //     favFruits = favFruits.replace(event.target.value + " ", "");
+            // }
+
+            for (let i = 0; i < frm.fruits.length; i++) {
+                if (frm.fruits[i].checked) {
+                    favFruits += frm.fruits[i].value + " ";
+                }
             }
         }
 
@@ -46,9 +52,9 @@
         비밀번호: <input type="password" name="pwd"><br>
 
         좋아하는 과일: 
-        <input type="checkbox" name='apple' value="풋사과" onclick="getCheckboxValue(event)"/>사과
-        <input type="checkbox" name="straw" value="딸기" onclick="getCheckboxValue(event)">딸기
-        <input type="checkbox" name="banana" value="바나나" onclick="getCheckboxValue(event)">바나나          
+        <input type="checkbox" name='fruits' value="풋사과" onclick="getCheckboxValue(event)"/>사과
+        <input type="checkbox" name="fruits" value="딸기" onclick="getCheckboxValue(event)">딸기
+        <input type="checkbox" name="fruits" value="바나나" onclick="getCheckboxValue(event)">바나나          
         <br>
 
         당신의 강의실:
