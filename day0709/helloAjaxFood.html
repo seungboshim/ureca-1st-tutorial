@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const xhr = new XMLHttpRequest();
+        
+        function hello() {
+            xhr.open("GET", "http://10.4.2.100:8080/food.jsp");
+            xhr.onreadystatechange = changeDiv;
+            xhr.send(null);
+        }
+
+        function changeDiv() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const str = xhr.responseText; // str = 샐러드,돈까스,부대찌개,짬뽕,순두부찌개
+                const foods = str.trim().split(",");
+                const div = document.querySelector("div");
+
+                let listStr = '<ul>';
+                foods.forEach((food) => {
+                    listStr += "<li>" + food + "</li>";
+                })
+                listStr += '</ul>';
+                
+                div.innerHTML = listStr;
+
+                // div.innerHTML = "<ul>"
+                // for (let i = 0; i < foods.length; i++) {
+                //     div.innerHTML += "<li>" + foods[i];
+                // }
+                // div.innerHTML += "</ul>";
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>Ajax 테스트</h3>
+    <hr>
+    <div></div>
+    <button onclick="hello()">ㅇ</button>
+</body>
+</html>

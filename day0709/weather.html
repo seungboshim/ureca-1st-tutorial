@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    const baseURL = "https://api.openweathermap.org/data/2.5/weather";
+    const apiKey = "fcbf1ec29a73f27aefce55e0c05c9e2c";
+    const lat = 37.5665; // 경도
+    const lon = 126.9780; // 위도
+
+    const imageURL = "https://openweathermap.org/img/wn/";
+
+    const xhr = new XMLHttpRequest();
+    function getWeather() {
+        // 위도, 경도에 따른 날씨 정보 가져오기
+        xhr.open("GET", `${baseURL}?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+        xhr.onreadystatechange = getInfo;
+        xhr.send(null);
+    }
+
+    function getInfo() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const obj = JSON.parse(xhr.response);
+            console.log(obj); // 서울 날씨의 객체 정보
+
+            const div = document.querySelector("div");
+            div.innerHTML = obj.weather[0].description;
+            
+            const img = document.createElement("img");
+            img.src = `${imageURL}${obj.weather[0].icon}@2x.png`;
+            img.width = 48;
+            div.appendChild(img);
+        }
+    }
+</script>
+<body>
+    <button onclick="getWeather()">서울날씨</button>
+    <div></div>
+</body>
+</html>
