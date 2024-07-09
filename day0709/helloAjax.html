@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
+        const xhr = new XMLHttpRequest();
+        
         function hello() {
-            var xhr = new XMLHttpRequest();
             // xhr.open("HTTP 요청방식", "요청 URL");
-            xhr.open("GET", "http://10.4.2.100:8080/res.jsp");
-            xhr.send(null);
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // console.log(xhr.responseText);
-                    show(xhr.responseText);
-                }
-            }
+            // xhr.open("GET", "http://10.4.2.100:8080/res.jsp");
 
-            const div = document.querySelector("div");
-            div.innerHTML = str;
+            // xhr.open("GET", "user.txt")
+            xhr.open("GET", "../day0708/ureca.txt")
+            // http:// 요청을 붙이지 않는다면 로컬 탐색 -> 파일명 경로만
+
+            // xhr.onreadystatechange = () => {
+            //     if (xhr.readyState == 4 && xhr.status == 200) {
+            //         const div = document.querySelector("div"); 
+            //         div.innerHTML = xhr.responseText;
+            //     }
+            // }
+            xhr.onreadystatechange = changeDiv;
+            
+            xhr.send(null);
+        }
+
+        function changeDiv() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const str = xhr.responseText;
+                const div = document.querySelector("div");
+                div.innerHTML = str;
+            }
         }
     </script>
 </head>
