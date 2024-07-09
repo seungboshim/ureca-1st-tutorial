@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Array::sort() & reverse()</title>
+</head>
+<body>
+<script>
+  const pets = ['햄스터', '개', '고양이', '앵무새'];
+
+  console.log('[초기값]', pets.toString()); // 햄스터,개,고양이,앵무새
+  console.log('[sort()]', pets.sort().toString()); // 개,고양이,앵무새,햄스터 : 가나다순 정렬
+  console.log('[reverse()]', pets.reverse().toString()); // 햄스터,앵무새,고양이,개 : 역순 정렬
+
+  const numbers = [22, 55, 33, 11, 44];
+
+  console.log('[초기값]', numbers); // [22, 55, 33, 11, 44]
+  console.log('[sort()]', numbers.sort()); // [11, 22, 33, 44, 55]
+  console.log('[reverse()]', numbers.reverse()); // [44, 11, 33, 55, 22]
+</script> 
+</body>
+</html>

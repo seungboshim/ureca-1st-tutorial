@@ -6,11 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="btn1" onclick="">불금</button>
+    <button class="addBtn" onclick="addButton()">불금</button>
+    <br>
     <script>
-        let btn = document.querySelector('#btn1');
-        const addBtn = () => {
+        let btn = document.querySelector('.addBtn');
+        let flag = 1;
+
+        const addButton = () => {
+            let newLable = document.createElement('span');
+            let newBtn = document.createElement('button');
+            newBtn.className = 'delBtn';
+            newBtn.style.marginLeft = '10px';
             
+            newLable.innerHTML = `유레카 - ${flag++}`;
+            newBtn.innerHTML = '삭제';
+            newBtn.onclick = deleteButton;
+            document.body.appendChild(newLable).appendChild(newBtn);
+            document.body.appendChild(document.createElement('br'));
+        }
+
+        const deleteButton = () => {
+            let delBtn = document.querySelector('.delBtn');
+            delBtn.parentNode.remove();
         }
     </script>
 </body>

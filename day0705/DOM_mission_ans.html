@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="urecaPrint()">불금</button><br>
+    <div id="d1"></div>
+
+    <script>
+        let cnt = 0;
+
+        /* 미션 1 */
+        function urecaPrint1() {
+            const d1 = document.getElementById('d1');
+            d1.innerHTML = '유레카';
+        }
+        
+        /* 미션 2 */
+        function urecaPrint2() {
+            const d1 = document.getElementById('d1');
+            // d1.innerHTML = '<div>유레카</div>'; <- 이거는 갈아끼울 뿐.. 추가가 안된다
+
+            // 부모노드.appendChild(자식노드) <- "노드" 형식이 들어와야함
+            const divNode = document.createElement('div'); // 태그명 -> <div></div> 저장됨
+            const txtNode = document.createTextNode(`유레카-${++cnt}`); // 텍스트명 -> "유레카" 저장됨
+            divNode.appendChild(txtNode); // <div>유레카</div> 탄생
+
+            d1.appendChild(divNode); // <div>유레카</div>이 DOM에 써짐
+        }
+
+        /* 미션 3 */
+        function urecaPrint3() {
+            const d1 = document.getElementById('d1');
+
+            const divNode = document.createElement('div'); 
+            // const txtNode = document.createTextNode(`유레카-${++cnt}`); 
+            // divNode.appendChild(txtNode);
+            // divNode.textContent = `유레카-${++cnt}`; // textContent == innerText
+            divNode.innerHTML = `유레카-${++cnt} <button>삭제</button>`; // innerHTML
+
+            d1.appendChild(divNode); 
+        }
+
+        /* 미션 4 */
+        function urecaPrint() {
+            const d1 = document.getElementById('d1');
+
+            const divNode = document.createElement('div'); 
+            divNode.innerHTML = `유레카-${++cnt} <button onclick="urecaDelete(this)">삭제</button>`;
+            divNode.setAttribute('id', `u${cnt}`);
+            /* 실제 만들어진 HTML
+                <div id="d1">
+                    <div id="u1">유레카-1<button onclick="urecaDelete()">삭제</button></div>
+                    <div id="u2">유레카-2<button onclick="urecaDelete()">삭제</button></div>
+                    <div id="u3">유레카-3<button onclick="urecaDelete()">삭제</button></div>
+                </div>
+            */
+
+            d1.appendChild(divNode); 
+        }
+
+        function urecaDelete(btn) {
+            // console.log(btn) // <button>
+            // console.log(btn.parentNode) // <div id="u1">
+            // console.log(btn.parentNode.parentNode) // <div id="d1">
+
+            btn.parentNode.parentNode.removeChild(btn.parentNode); 
+            // 버튼의 부모의 부모인 d1에서, d1의 자식인 버튼의 부모 div를 삭제
+
+            // const d1 = document.getElementById('d1');
+            // d1.removeChild(btn.parentNode);
+            // // d1의 자식 중 버튼의 부모를 삭제
+        }
+    </script>
+</body>
+</html>

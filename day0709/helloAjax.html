@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function hello() {
+            var xhr = new XMLHttpRequest();
+            // xhr.open("HTTP 요청방식", "요청 URL");
+            xhr.open("GET", "http://10.4.2.100:8080/res.jsp");
+            xhr.send(null);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // console.log(xhr.responseText);
+                    show(xhr.responseText);
+                }
+            }
+
+            const div = document.querySelector("div");
+            div.innerHTML = str;
+        }
+    </script>
+</head>
+<body>
+    <h3>Ajax 테스트</h3>
+    <hr>
+    <div></div>
+    <button onclick="hello()">ㅇ</button>
+</body>
+</html>
