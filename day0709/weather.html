@@ -23,14 +23,14 @@
 
     function getInfo() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            const obj = JSON.parse(xhr.response);
-            console.log(obj); // 서울 날씨의 객체 정보
+            const data = JSON.parse(xhr.response);
+            console.log(data); // 서울 날씨의 객체 정보
 
             const div = document.querySelector("div");
-            div.innerHTML = obj.weather[0].description;
+            div.innerHTML = data.weather[0].description;
             
             const img = document.createElement("img");
-            img.src = `${imageURL}${obj.weather[0].icon}@2x.png`;
+            img.src = `${imageURL}${data.weather[0].icon}@2x.png`;
             img.width = 48;
             div.appendChild(img);
         }
