@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .lottoGenBtn {
+            margin: 24px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .lottoContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            margin: 24px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .lottoBall {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: red;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        const balls = [];
+        let isDone = false;
+
+        const loadLottoLogs = () => {
+            const lottoLogsContainer = document.querySelector('.lottoLogsContainer');
+            const lottoLogs = JSON.parse(localStorage.getItem('lotto'));
+            if (lottoLogs) {
+                lottoLogs.forEach(log => {
+                    const logElement = document.createElement('div');
+                    logElement.textContent = `${log.time} [${log.numbers.join(', ')}]`;
+                    lottoLogsContainer.appendChild(logElement);
+                })
+            }
+        }
+
+        const generateLotto = () => {
+            while (true) {
+                if (balls.length >= 6) {
+                    return;
+                } 
+                const randomNumber = Math.floor(Math.random() * 45) + 1;
+
+                if (balls.find(ball => ball == randomNumber)) {
+                    continue;
+                } else {
+                    balls.push(randomNumber);
+                }
+            }
+        }
+
+        const lotto = () => {
+            generateLotto();
+
+            if (isDone) {
+                return;
+            }
+
+            balls.sort((a, b) => a - b);
+
+            const localLogs = localStorage.getItem('lotto');
+            const records = localLogs ? JSON.parse(localLogs) : []; // 기존 기록 있으면..
+            const currTime = new Date().toLocaleString('ko-KR');
+            const currLog = {
+                time: currTime,
+                numbers: balls
+            }
+            const newLogs = records.length > 0 ? [...records, currLog] : [currLog]; // 새로운 기록
+            console.log(newLogs);
+            localStorage.setItem('lotto', JSON.stringify(newLogs));
+
+            balls.forEach(number => {
+                const lottoContainer = document.querySelector('.lottoContainer');
+                const lottoBall = document.createElement('div');
+
+                lottoBall.className = 'lottoBall';
+                if (number <= 10) {
+                    lottoBall.style.backgroundColor = '#ede974'; // yellow
+                } else if (number <= 20) {
+                    lottoBall.style.backgroundColor = '#5481eb'; // blue
+                } else if (number <= 30) {
+                    lottoBall.style.backgroundColor = '#ed6d66'; // red
+                } else if (number <= 40) {
+                    lottoBall.style.backgroundColor = '#f0f0f0'; // gray
+                } else {
+                    lottoBall.style.backgroundColor = '#38d65f'; // green
+                }
+
+                lottoBall.innerText = number;
+                lottoContainer.appendChild(lottoBall);
+            });
+            isDone = true;
+
+            loadLottoLogs();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn.news.eugenes.co.kr/news/photo/201704/2830_5671_4357.jpg" width="200px">
+        <button onclick="lotto()" class="lottoGenBtn">번호 생성</button>
+        <div class="lottoContainer">
+            
+        </div>
+        <div class="lottoLogsContainer"></div>
+    </div>
+</body>
+</html>
