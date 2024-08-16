@@ -1,8 +1,9 @@
 import { useState } from "react";
+import Greeting from "../day0814/Greeting";
 
 const answer = Math.floor(Math.random() * 100) + 1;
 
-export default function Mission() {
+export default function MyNumberGuess() {
     const [input, setInput] = useState(0);
     const [answerCheck, setAnswerCheck] = useState('');
 
@@ -30,6 +31,8 @@ export default function Mission() {
             <button onClick={handleCheck}>정답 확인</button>
 
             <p>확인 결과 {answerCheck}</p>
+
+            <Greeting isLoggedIn={false} />
         </div>
     )
 }
