@@ -6,6 +6,8 @@ import SignUp from './day0816/SignUp';
 import Calculator from './day0816/Calculator';
 import MyNumberGuess3 from './day0816/MyNumberGuess3';
 import MyNumberGuess3New from './day0816/MyNumberGuess3New';
+import WelcomeDialog from './day0819/WelcomeDialog';
+import MyNumberGuess4 from './Compound/Guess';
 // import App from './App';
 // import reportWebVitals from './reportWebVitals';
 // import Counter from './day0812/Counter';
@@ -27,6 +29,6 @@ import MyNumberGuess3New from './day0816/MyNumberGuess3New';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <>
-        <MyNumberGuess3New />
+        <MyNumberGuess4 />
     </>
 );

@@ -4,10 +4,6 @@ const scaleNames = {
 }
 
 function TemperatureInput (props) {
-    // const handleChange = (e) => {
-    // 부모 컴포넌트에서 변경 할거임
-    // }
-
     return (
         <fieldset>
             <legend>

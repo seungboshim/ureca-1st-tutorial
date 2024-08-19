@@ -6,6 +6,7 @@ export default function MyNumberGuess3() {
 
     const [resultList, setResultList] = useState([]); // 결과 리스트 (출력용)
     const [record, setRecord] = useState([]); // 기록 저장
+    const [currRecord, setCurrRecord] = useState({record: 0, answer: 0}); // 현재 기록
 
     const [isFinished, setIsFinished] = useState(false); // 맞췄니? 이제 할일을 하자
 
@@ -26,6 +27,7 @@ export default function MyNumberGuess3() {
         if (Number(input) === answer) {
             result.string = `${result.tries}번째 시도 [${input}] 정답입니다!!!!`;
             setIsFinished(true);
+            // setRecord([...record, {record: resultList.length + 1, answer: answer}]);
         } else if (input < answer) {
             result.string = `${result.tries}번째 시도 [${input}] 높여주세요 ㅜㅜ`;
         } else {
@@ -42,6 +44,13 @@ export default function MyNumberGuess3() {
             setRecord([...record, recordHistory]);
         }
     }, [isFinished])
+
+    useEffect(() => {
+        if (resultList.length >= 10) {
+            alert('10번 넘게 틀렸네요.. 다시 시작합니다');
+            handleReset();
+        }
+    }, [resultList])
 
     const handleReset = () => {
         setAnswer(Math.floor(Math.random() * 100) + 1);
@@ -78,12 +87,14 @@ export default function MyNumberGuess3() {
 
             <p>확인 결과▶︎ {resultList.length > 0 && resultList[0].string}</p>
 
+            현재 시도
             <ul>
                 {resultList.map((answer) => (
                     <li key={answer.tries}>{answer.string}</li>
                 ))}
             </ul>
 
+            이전 시도
             <ul>
                 {record.map((r, idx) => (
                     <li key={idx}>{r.record}트만에 정답 {r.answer}를 맞췄군요..</li>

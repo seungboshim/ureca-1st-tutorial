@@ -28,8 +28,8 @@ function Calculator(props) {
 
     return (
         <div>
-            <TemperatureInput scale={scale} temperature={celsius} onTemperatureChange={handleCelsiusChange} />
-            <TemperatureInput scale={scale} temperature={fahrenheit} onTemperatureChange={handleFahrenheitChange} />
+            <TemperatureInput scale="c" temperature={celsius} onTemperatureChange={handleCelsiusChange} />
+            <TemperatureInput scale="f" temperature={fahrenheit} onTemperatureChange={handleFahrenheitChange} />
         </div>
     )
 }
