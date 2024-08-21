@@ -8,6 +8,10 @@ import MyNumberGuess3 from './day0816/MyNumberGuess3';
 import MyNumberGuess3New from './day0816/MyNumberGuess3New';
 import WelcomeDialog from './day0819/WelcomeDialog';
 import MyNumberGuess4 from './Compound/Guess';
+import MyApp4 from './\bday0820/MyApp4';
+import MyButtonCounter from './\bday0820/MyButtonCounter';
+import MyButtonCounter2 from './\bday0820/MyButtonCounter2';
+import MyCalc from './\bday0820/MyCalc';
 // import App from './App';
 // import reportWebVitals from './reportWebVitals';
 // import Counter from './day0812/Counter';
@@ -29,6 +33,6 @@ import MyNumberGuess4 from './Compound/Guess';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <>
-        <MyNumberGuess4 />
+        <MyCalc />
     </>
 );
