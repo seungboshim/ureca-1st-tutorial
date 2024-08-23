@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Button from '../ui/Button';
 import { useNavigate } from "react-router-dom";
 import PostList from "../list/PostList";
-import data from "../../data.json";
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -20,7 +19,11 @@ const Container = styled.div`
     }
 `;
 
-export default function MainPage(props) {
+export default function MainPage() {
+    let posts = [];
+    if (localStorage.getItem('posts') !== null) {
+        posts = JSON.parse(localStorage.getItem('posts'));
+    }
 
     const navigate = useNavigate();
     return (
@@ -28,7 +31,7 @@ export default function MainPage(props) {
             <Container>
                 <Button title="글 작성하기" onClick={()=>navigate('/post-write')}/>  
                 <PostList
-                    posts={data}
+                    posts={posts}
                     onClickItem={(item) => {navigate(`/post/${item.id}`)}}
                 >
                 </PostList>

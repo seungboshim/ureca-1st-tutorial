@@ -14,8 +14,15 @@ const StyledTextArea = styled.textarea`
     padding: 16px;
     font-size: 16px;
     line-height: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s;
+    }
 `
-;ㅣ
+;
 
 function TextInput(props){
     const {height, value, onChange} = props;

@@ -12,14 +12,27 @@ const Wrapper = styled.div`
     border-radius: 8px;
     cursor: pointer;
     background: white;
-    :hover {
-        background: lightgrey;
+    &:hover {
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s;
     }
 `;
 
-const TitleText = styled.p`
+const TitleText = styled.span`
     font-size: 20px;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+`;
+
+const ContentText = styled.span`
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 `;
 
 function PostListItem(props){
@@ -29,6 +42,9 @@ function PostListItem(props){
            <TitleText>
                {post.title}
            </TitleText>
+           <ContentText>
+                {post.content}
+           </ContentText>
        </Wrapper>
    );
 }

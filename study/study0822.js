@@ -1,3 +1,10 @@
+// 20장
+
+(function() {
+    // 'use strict';
+    console.log(this); // window
+}());
+
 // 21장: 빌트인 객체
 
 /*
