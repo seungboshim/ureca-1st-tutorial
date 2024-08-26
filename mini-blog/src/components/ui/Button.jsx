@@ -9,13 +9,15 @@ const StyledButton = styled.button`
     font-size: 16px;
     border-width: 1px;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     box-shadow: none;
     background-color: white;
     cursor: pointer;
     &:hover {
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
-        transition: box-shadow 0.3s;
+        background-color: black;
+        color: white;
+        transition: box-shadow 0.3s, background-color 0.3s, color 0.3s;
     }
 `;
 

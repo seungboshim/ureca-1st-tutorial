@@ -20,8 +20,11 @@ const Container = styled.div`
 `;
 
 export default function MainPage() {
+    // posts 불러오기
     let posts = [];
     if (localStorage.getItem('posts') !== null) {
+        // getItem으로 posts 불러옴 -> 스트링임
+        // JSON.parse로 스트링 -> 객체로 변환
         posts = JSON.parse(localStorage.getItem('posts'));
     }
 

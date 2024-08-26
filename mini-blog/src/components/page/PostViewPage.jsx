@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 const PostContainer = styled.div`
     padding: 8px 16px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 8px;
     margin-bottom: 16px;
 `;
@@ -28,19 +28,10 @@ const TitleText = styled.p`
     font-size: 28px;
     font-weight: 500;
 `;
-const CommentContainer = styled.div`
-    /* :not(:last-child) {
-        margin-bottom: 16px;
-    } */
-`
 const ContentText = styled.p`
     font-size: 20px;
     line-height: 32px;
     white-space: pre-wrap;
-`;
-const CommentLabel = styled.p`
-    font-size: 16px;
-    font-weight: 500;
 `;
 
 export default function PostViewPage() {
@@ -101,6 +92,28 @@ export default function PostViewPage() {
         navigate('/');
     }
 
+    const handleDeleteComment = (commentId) => {
+        const comments = post.comments;
+        const newComments = comments.filter((comment) => {
+            return comment.id !== parseInt(commentId);
+        });
+
+        const newPost = {...post, comments: newComments};
+        const newPosts = posts.map((post) => {
+            if (post.id === parseInt(postId)) {
+                return newPost;
+            } else {
+                return post;
+            }
+        })
+
+        setPost(newPost);
+        setPosts(newPosts);
+
+        localStorage.setItem('posts', JSON.stringify(newPosts));
+        alert("삭제되었습니다.");
+    }
+
     return (
         <Wrapper>
             <Container>
@@ -115,10 +128,10 @@ export default function PostViewPage() {
                     <TitleText>{post.title}</TitleText>
                     <ContentText>{post.content}</ContentText>
                 </PostContainer>
-                <CommentContainer>
-                    <CommentList comments={post.comments}></CommentList>
+                <>
+                    <CommentList comments={post.comments} handleDelete={handleDeleteComment}></CommentList>
                     <CommentInput onChange={handleChange} onClick={handleSubmit} value={commentInput}></CommentInput>
-                </CommentContainer>
+                </>
             </Container>
         </Wrapper>
     )

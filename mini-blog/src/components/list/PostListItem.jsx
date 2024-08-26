@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 8px;
     cursor: pointer;
     background: white;

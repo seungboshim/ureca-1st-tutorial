@@ -50,33 +50,6 @@ export default function PostWritePage() {
 
     const [title, setTitle]= useState('');
     const [content, setContent]= useState('');
-    // const handleSubmit = () => {
-    //     let ids = [];
-    //     let titles = [];
-    //     let contents = [];
-
-    //     // 기존에 로컬스토리지에 있으면 배열에 담기
-    //     if (localStorage.getItem('id') !== null) {
-    //         // ids = localStorage.getItem('id').split(',');
-    //         // titles = localStorage.getItem('title').split(',');
-    //         // contents = localStorage.getItem('content').split(',');
-    //         ids = JSON.parse(localStorage.getItem('id'));
-    //         titles = JSON.parse(localStorage.getItem('title'));
-    //         contents = JSON.parse(localStorage.getItem('content'));
-    //     }
-
-    //     // 새로운 글 제목, 내용 추가
-    //     // localStorage.setItem('id', [...ids, ids.length]);
-    //     // localStorage.setItem('title', [...titles, title]);
-    //     // localStorage.setItem('content', [...contents, content]);
-    //     localStorage.setItem('id', JSON.stringify([...ids, ids.length]));
-    //     localStorage.setItem('title', JSON.stringify([...titles, title]));
-    //     localStorage.setItem('content', JSON.stringify([...contents, content]));
-
-    //     console.log(ids, titles, contents);
-
-    //     navigate('/');
-    // }
 
     const handleSubmit = () => {
         let posts = [];
