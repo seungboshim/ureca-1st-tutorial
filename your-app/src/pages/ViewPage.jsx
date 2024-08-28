@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import Button from "../components/Button"
 
 const Wrapper = styled.div`
@@ -82,9 +83,20 @@ export default function ViewPage() {
     const [people, setPeople] = useState([]);
     const navigate = useNavigate();
 
+    // useEffect(() => {
+    //     const storedData = JSON.parse(localStorage.getItem('people')) || [];
+    //     setPeople(storedData);
+    // }, []);
+
+    // GET /person/list -> people에 저장
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('people')) || [];
-        setPeople(storedData);
+        axios.get('http://localhost:8080/person/list')
+        .then((response) => {
+            setPeople(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        })
     }, []);
 
     return (
@@ -98,8 +110,8 @@ export default function ViewPage() {
                 </TableHeader>
                 {people && people.map((person) => {
                     return (
-                        <TableBody key={person.id} onClick={() => navigate(`/edit/${person.id}`)}>
-                            <TableItem>{person.id}</TableItem>
+                        <TableBody key={person.no} onClick={() => navigate(`/edit/${person.no}`)}>
+                            <TableItem>{person.no}</TableItem>
                             <TableItem>{person.name}</TableItem>
                             <TableItem>{person.age}</TableItem>
                             <TableItem>{person.job}</TableItem>

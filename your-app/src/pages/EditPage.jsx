@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import TextInput from "../components/TextInput"
 import Button from "../components/Button"
+import axios from 'axios';
 
 const Wrapper = styled.div`
     display: flex;
@@ -46,16 +47,17 @@ export default function EditPage() {
     const [ageValid, setAgeValid] = useState(true);
     const [jobValid, setJobValid] = useState(true);
 
-    const [people, setPeople] = useState([]);
-
+    /** GET /person/upform?no=${id} -> id에 해당하는 사람만 가져오기: name, age, job 저장 */
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('people')) || [];
-        setPeople(storedData);
-
-        const person = storedData.find((person) => person.id === id);
-        setName(person.name);
-        setAge(person.age);
-        setJob(person.job);
+        axios.get(`http://localhost:8080/person/upform?no=${id}`)
+        .then((response) => {
+            setName(response.data.name);
+            setAge(response.data.age);
+            setJob(response.data.job);
+        })
+        .catch((error) => {
+            console.error(error);
+        })
     }, []);
 
     const handleInput = (e) => {
@@ -81,6 +83,7 @@ export default function EditPage() {
         }
     }
 
+    /** PATCH /person/upform?no=${id} -> id에 해당하는 사람의 정보 수정 */
     const handleSubmit = () => {
         if (!name) setNameValid(false);
         if (!age) setAgeValid(false);
@@ -88,27 +91,31 @@ export default function EditPage() {
         if (!name || !age || !job) return;
         
         const data = {
-            id: id,
             name: name,
             age: age,
             job: job
         }
 
-        const newData = people.map((person) => {
-            if (person.id === id) {
-                return data;
-            } else {
-                return person;
-            }
+        axios.patch(`http://localhost:8080/person/upform?no=${id}`, data)
+        .then((response) => {
+            console.log(response);
+            navigate('/');
         })
-        localStorage.setItem('people', JSON.stringify(newData));
-        navigate('/');
+        .catch((error) => {
+            console.error(error);
+        })
     }
 
+    /** DELETE /person/delete?no=${id} -> id에 해당하는 사람 삭제 */
     const handleDelete = () => {
-        const newData = people.filter((person) => person.id !== id);
-        localStorage.setItem('people', JSON.stringify(newData));
-        navigate('/');
+        axios.delete(`http://localhost:8080/person/delete?no=${id}`)
+        .then((response) => {
+            console.log(response);
+            navigate('/');
+        })
+        .catch((error) => {
+            console.error(error);
+        })
     }
 
 

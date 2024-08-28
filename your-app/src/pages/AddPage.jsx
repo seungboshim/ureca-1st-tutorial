@@ -2,6 +2,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import Button from '../components/Button';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import TextInput from "../components/TextInput";
 
 const Wrapper = styled.div`
@@ -74,18 +75,21 @@ export default function AddPage() {
         if (!job) setJobValid(false);
         if (!name || !age || !job) return;
 
-        const storedData = JSON.parse(localStorage.getItem('people')) || [];
-        const id = storedData[storedData.length - 1]?.id + 1 || 0;
         const data = {
-            id: id,
             name: name,
             age: age,
             job: job
         }
 
-        const newData = [...storedData, data];
-        localStorage.setItem('people', JSON.stringify(newData));
-        navigate('/');
+        // POST
+        axios.post('http://localhost:8080/person/form', data)
+        .then((response) => {
+            console.log(response);
+            navigate('/');
+        })
+        .catch((error) => {
+            console.error(error);
+        })
     }
 
     return (
