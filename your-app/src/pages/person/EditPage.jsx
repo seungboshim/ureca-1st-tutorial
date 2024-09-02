@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import TextInput from "../components/TextInput"
-import Button from "../components/Button"
+import TextInput from "../../components/TextInput"
+import Button from "../../components/Button"
 import axios from 'axios';
 
 const Wrapper = styled.div`

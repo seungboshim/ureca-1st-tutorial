@@ -1,37 +1,27 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import ViewPage from "./pages/ViewPage";
-import InputPage from "./pages/AddPage";
-import EditPage from "./pages/EditPage";
+import ViewPage from "./pages/person/ViewPage";
+import EditPage from "./pages/person/EditPage";
+import BookViewPage from './pages/book/BookViewPage';
+import BookAddPage from './pages/book/BookAddPage';
+import BookEditPage from './pages/book/BookEditPage';
+import AddPage from './pages/person/AddPage';
+import Header from './components/Header';
 
-const MainTitle = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    width: 100%;
-    height: 60px;
-    background-color: black;
-    color: white;
-`;
 
-const MainTitleText = styled(Link)`
-    text-decoration: none;
-    color: white;
-`;
 
 function App() {
   return (
     <BrowserRouter>
-      <MainTitle>
-        <MainTitleText to='/'>안녕하세요 뉴진스입니다.</MainTitleText>
-      </MainTitle>
+      <Header />
       <Routes>
-        <Route index element={<ViewPage />}></Route>
-        <Route path="/add" element={<InputPage />}></Route>
-        <Route path="/edit/:id" element={<EditPage />}></Route>
+        <Route path="/person" element={<ViewPage />}></Route>
+        <Route path="/person/add" element={<AddPage />}></Route>
+        <Route path="/person/edit/:id" element={<EditPage />}></Route>
+        <Route index element={<BookViewPage />}></Route>
+        <Route path="/book/add" element={<BookAddPage />}></Route>
+        <Route path="/book/edit/:id" element={<BookEditPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

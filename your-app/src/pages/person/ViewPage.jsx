@@ -2,7 +2,8 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import Button from "../components/Button"
+import Button from "../../components/Button"
+import { getPersonList } from "../../apis/person"
 
 const Wrapper = styled.div`
     display: flex;
@@ -90,13 +91,7 @@ export default function ViewPage() {
 
     // GET /person/list -> people에 저장
     useEffect(() => {
-        axios.get('http://localhost:8080/person/list')
-        .then((response) => {
-            setPeople(response.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        })
+        getPersonList(setPeople);
     }, []);
 
     return (
