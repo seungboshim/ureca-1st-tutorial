@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loginMember } from '../apis/member';
+import { LoginContext } from "../utils/LoginContext";
 
 const MainTitle = styled.div`
     display: flex;
@@ -60,42 +61,42 @@ const LoginInput = styled.input`
 `;
 
 export default function Header() {
-    const [isLogin, setIsLogin] = useState(false);
-    const [member, setMember] = useState({
+    const { isLogin, setIsLogin, member, setMember } = useContext(LoginContext)
+    const [memberInput, setMemberInput] = useState({
         id: '',
         pwd: ''
     });
-    const [memberData, setMemberData] = useState(null);
 
     // 첫 렌더링
     useEffect(() => {
         if (sessionStorage.getItem('member')) { // 로그인 정보가 있으면
             setIsLogin(true); // 로그인 상태로 변경
-            setMemberData(JSON.parse(sessionStorage.getItem('member'))); // memberData에 그거 저장
+            setMember(JSON.parse(sessionStorage.getItem('member'))); // memberData에 그거 저장
         }
     }, [])
 
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setMember({
-            ...member,
+        setMemberInput({
+            ...memberInput,
             [name]: value
         });
     }
 
     const handleLogin = async () => {
-        const memberResponse = await loginMember(member);
+        const memberResponse = await loginMember(memberInput);
         if (memberResponse) {
             setIsLogin(true);
-            setMemberData(memberResponse);
-            sessionStorage.setItem('member', JSON.stringify(memberResponse));
+            setMember({...memberResponse, pwd: null});
+
+            sessionStorage.setItem('member', JSON.stringify({...memberResponse, pwd: null}));
         }
     }
 
     const handleLogout = () => {
         setIsLogin(false);
-        setMemberData(null);
+        setMember(null);
         sessionStorage.clear();
     }
 
@@ -105,13 +106,13 @@ export default function Header() {
                 <MainTitleText to='/'>책을 읽읍시다.</MainTitleText>
                 {isLogin ? (
                     <LoginContainer>
-                        <LoginText>{memberData.name}님 환영해요.</LoginText>
+                        <LoginText>{member.name}님 환영해요.</LoginText>
                         <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
                     </LoginContainer>
                 ) : (
                     <LoginContainer>
-                        <LoginInput name='id' value={member.id} onChange={handleChange} placeholder="ID" type="text"></LoginInput>
-                        <LoginInput name='pwd' value={member.pwd} onChange={handleChange} placeholder="PW" type="password"></LoginInput>
+                        <LoginInput name='id' value={memberInput.id} onChange={handleChange} placeholder="ID" type="text"></LoginInput>
+                        <LoginInput name='pwd' value={memberInput.pwd} onChange={handleChange} placeholder="PW" type="password"></LoginInput>
                         <LoginButton onClick={handleLogin}>로그인</LoginButton>
                     </LoginContainer>
                 )}

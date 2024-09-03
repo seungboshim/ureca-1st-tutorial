@@ -1,8 +1,19 @@
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 export const getBookList = async (setState) => {
     try {
-        const response = await axios.get('http://localhost:8080/book/list');
+        const response = await axios.get(`${BASE_URL}/book/list/all`);
+        setState(response.data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getBookListWithPage = async (page, setState) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/book/list?page=${page}`);
         setState(response.data);
     } catch (error) {
         console.error(error);
@@ -11,7 +22,7 @@ export const getBookList = async (setState) => {
 
 export const getBook = async (isbn, setState) => {
     try {
-        const response = await axios.get(`http://localhost:8080/book/get?isbn=${isbn}`);
+        const response = await axios.get(`${BASE_URL}/book/get?isbn=${isbn}`);
         setState(response.data);
     } catch (error) {
         console.error(error);
@@ -20,7 +31,7 @@ export const getBook = async (isbn, setState) => {
 
 export const addBook = async (book) => {
     try {
-        await axios.post('http://localhost:8080/book/add', book, {
+        await axios.post(`${BASE_URL}/book/add`, book, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
@@ -32,7 +43,7 @@ export const addBook = async (book) => {
 
 export const editBook = async (isbn, book) => {
     try {
-        await axios.put(`http://localhost:8080/book/put?isbn=${isbn}`, book);
+        await axios.put(`${BASE_URL}/book/put?isbn=${isbn}`, book);
     } catch (error) {
         console.error(error);
     }
@@ -40,7 +51,7 @@ export const editBook = async (isbn, book) => {
 
 export const deleteBook = async (isbn) => {
     try {
-        await axios.delete(`http://localhost:8080/book/delete?isbn=${isbn}`);
+        await axios.delete(`${BASE_URL}/book/delete?isbn=${isbn}`);
     } catch (error) {
         console.error(error);
     }

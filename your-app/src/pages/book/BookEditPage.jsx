@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import TextInput from "../../components/TextInput"
 import Button from "../../components/Button"
 import { deleteBook, editBook, getBook } from "../../apis/book"
+import { LoginContext } from "../../utils/LoginContext"
 
 const Wrapper = styled.div`
     display: flex;
@@ -38,9 +39,16 @@ const ButtonContainer = styled.div`
 `
 
 export default function BookEditPage() {
+    const BASE_URL = process.env.REACT_APP_API_URL;
+    const { isLogin } = useContext(LoginContext);
     const params = useParams();
     const id = parseInt(params.id);
     const navigate = useNavigate();
+
+    if (!isLogin) {
+        alert('로그인이 필요한 페이지입니다.');
+        navigate('/');
+    }
 
     // const [title, setTitle] = useState('');
     // const [author, setAuthor] = useState('');
@@ -52,7 +60,9 @@ export default function BookEditPage() {
         title: '',
         author: '',
         price: 0,
-        desc: ''
+        desc: '',
+        img: '',
+        saveImg: '',
     });
 
     useEffect(() => {
@@ -121,6 +131,7 @@ export default function BookEditPage() {
         <Wrapper>
             <Container>
                 <Title></Title>
+                {book.img && <img src={`${BASE_URL}/upload/${book.saveImg}`} width="300px" alt="책 이미지" />}
                 <InputContainer>
                     <TextInput name='제목' value={book.title} onChange={handleInput} isValid={titleValid} type='text'></TextInput>
                     <TextInput name='작가' value={book.author} onChange={handleInput} isValid={authorValid} type='text'></TextInput>

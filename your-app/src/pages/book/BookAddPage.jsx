@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import styled from "styled-components"
-import Button from '../../components/Button';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+
+import { addBook } from "../../apis/book";
+import { LoginContext } from "../../utils/LoginContext";
+
+import Button from '../../components/Button';
 import TextInput from "../../components/TextInput";
-import { addBook, addImage, getBook } from "../../apis/book";
 import FileInput from "../../components/FileInput";
 
 const Wrapper = styled.div`
@@ -41,6 +43,13 @@ const ButtonContainer = styled.div`
 `
 
 export default function BookAddPage() {
+    const { isLogin } = useContext(LoginContext);
+    const navigate = useNavigate();
+
+    if (!isLogin) {
+        alert('로그인이 필요한 페이지입니다.');
+        navigate('/login');
+    }
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [price, setPrice] = useState(0);
@@ -51,7 +60,7 @@ export default function BookAddPage() {
     const [authorValid, setAuthorValid] = useState(true);
     const [priceValid, setPriceValid] = useState(true);
 
-    const navigate = useNavigate();
+
 
     const InputValidation = () => {
         if (!title) setTitleValid(false);
@@ -94,16 +103,19 @@ export default function BookAddPage() {
     const handleSubmit = async () => {
         if (!InputValidation()) return;
 
-        const book = {
-            title: title,
-            author: author,
-            price: price,
-            description: desc
-        }
+        // const book = {
+        //     title: title,
+        //     author: author,
+        //     price: price,
+        //     description: desc
+        // }
 
         const data = new FormData();
-        data.append('book', new Blob(JSON.stringify(book)));
-        data.append('file', file);
+        data.append('title', title);
+        data.append('author', author);
+        data.append('price', price);
+        data.append('desc', desc);
+        data.append('upfile', file);
 
         // POST
         await addBook(data);

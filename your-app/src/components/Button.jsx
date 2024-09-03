@@ -18,14 +18,34 @@ const Wrapper = styled.div`
         transition: box-shadow 0.3s;
     }
 `
+const DisabledWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 1px solid lightgray;
+    background-color: gray;
+    color: white;
+    font-weight: ${(props) => props.theme === 'primary' ? '600' : '400'};
+    border-radius: 5px;
+    user-select: none;
+`
 
-function Button({ onClick, label, theme }) {
-    // const { onClick, label } = props;
-    return (
-        <Wrapper onClick={onClick} theme={theme}>
-            {label}
-        </Wrapper>
-    )
+function Button({ onClick, label, theme, disabled }) {
+    if (disabled) {
+        return (
+            <DisabledWrapper>
+                {label}
+            </DisabledWrapper>
+        )
+    } else {
+        return (
+            <Wrapper onClick={onClick} theme={theme}>
+                {label}
+            </Wrapper>
+        )
+    }
 }
 
 export default Button;
