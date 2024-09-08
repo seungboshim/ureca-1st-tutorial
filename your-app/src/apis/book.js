@@ -43,7 +43,11 @@ export const addBook = async (book) => {
 
 export const editBook = async (isbn, book) => {
     try {
-        await axios.put(`${BASE_URL}/book/put?isbn=${isbn}`, book);
+        await axios.put(`${BASE_URL}/book/put?isbn=${isbn}`, book, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
     } catch (error) {
         console.error(error);
     }

@@ -46,10 +46,13 @@ export default function BookAddPage() {
     const { isLogin } = useContext(LoginContext);
     const navigate = useNavigate();
 
+    /** 로그인 여부 가져와서 페이지 접근 제어 */
     if (!isLogin) {
         alert('로그인이 필요한 페이지입니다.');
         navigate('/login');
     }
+
+    /** 따로따로 관리? */
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [price, setPrice] = useState(0);
@@ -60,8 +63,7 @@ export default function BookAddPage() {
     const [authorValid, setAuthorValid] = useState(true);
     const [priceValid, setPriceValid] = useState(true);
 
-
-
+    /** 입력칸 유효성 검사 */
     const InputValidation = () => {
         if (!title) setTitleValid(false);
         if (!author) setAuthorValid(false);
@@ -70,6 +72,7 @@ export default function BookAddPage() {
         return true;
     }
 
+    /** 입력창 이벤트 함수 */
     const handleInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -84,6 +87,7 @@ export default function BookAddPage() {
             }
         }
 
+        /** 각 입력창의 상태를 따로 정의하는 경우 */
         if (name === '제목') {
             setTitle(value);
         } else if (name === '작가') {
@@ -100,16 +104,11 @@ export default function BookAddPage() {
         setFile(file);
     }
 
+    /** POST */
     const handleSubmit = async () => {
         if (!InputValidation()) return;
 
-        // const book = {
-        //     title: title,
-        //     author: author,
-        //     price: price,
-        //     description: desc
-        // }
-
+        /** FormData 객체 생성 */
         const data = new FormData();
         data.append('title', title);
         data.append('author', author);
@@ -119,7 +118,6 @@ export default function BookAddPage() {
 
         // POST
         await addBook(data);
-
         navigate('/');
     }
 

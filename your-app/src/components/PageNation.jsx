@@ -11,7 +11,13 @@ const ButtonWrapper = styled.button`
     justify-content: center;
     align-items: center;
     margin: 16px;
+    width: 40px;
+    height: 40px;
+    background-color: lightgray;
+    font-weight: 600;
+    border-radius: 50%;
     cursor: pointer;
+    border: none;
 `
 
 function PageNation({ page, setPage, totalPage }) {

@@ -69,9 +69,8 @@ export default function Header() {
 
     // 첫 렌더링
     useEffect(() => {
-        if (sessionStorage.getItem('member')) { // 로그인 정보가 있으면
+        if (sessionStorage.getItem('accessToken')) { // 로그인 정보가 있으면
             setIsLogin(true); // 로그인 상태로 변경
-            setMember(JSON.parse(sessionStorage.getItem('member'))); // memberData에 그거 저장
         }
     }, [])
 
@@ -84,13 +83,16 @@ export default function Header() {
         });
     }
 
-    const handleLogin = async () => {
-        const memberResponse = await loginMember(memberInput);
-        if (memberResponse) {
-            setIsLogin(true);
-            setMember({...memberResponse, pwd: null});
+    const [memberResponse, setMemberResponse] = useState(null);
 
-            sessionStorage.setItem('member', JSON.stringify({...memberResponse, pwd: null}));
+    const handleLogin = async () => {
+        const response = await loginMember(memberInput);
+        setMemberResponse(response);
+        if (response) {
+            setIsLogin(true);
+
+            sessionStorage.setItem('accessToken', response.accessToken);
+            sessionStorage.setItem('refreshToken', response.refreshToken);
         }
     }
 
@@ -104,9 +106,9 @@ export default function Header() {
         <div>
             <MainTitle>
                 <MainTitleText to='/'>책을 읽읍시다.</MainTitleText>
-                {isLogin ? (
+                {isLogin && memberResponse ? (
                     <LoginContainer>
-                        <LoginText>{member.name}님 환영해요.</LoginText>
+                        <LoginText>{memberResponse.name}님 환영해요.</LoginText>
                         <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
                     </LoginContainer>
                 ) : (

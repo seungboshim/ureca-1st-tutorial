@@ -68,12 +68,12 @@ const TableItem = styled.div`
     padding: 12px;
 `
 const ImageContainer = styled.div`
-    width: 500px;
+    width: 50%;
     border-radius: 24px;
     position: relative;
 `
 const Image = styled.img`
-    width: 500px;
+    width: 100%;
     border-radius: 24px;
 `
 const Ballon = styled.div`
